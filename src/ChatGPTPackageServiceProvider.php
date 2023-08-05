@@ -9,7 +9,7 @@ class ChatGPTPackageServiceProvider extends ServiceProvider
     public function boot()
     {
         if($this->app->runningInConsole()) {
-            $migrationPath = $this->tenancy ? 'migrations/tenant' : 'migrations';
+            $migrationPath = function_exists('tenancy') ? 'migrations/tenant' : 'migrations';
             $this->publishes([
                 __DIR__ . '/../database/migrations/tenant' => database_path($migrationPath),
                 __DIR__ . '/../database/migrations' => database_path('migrations'),
